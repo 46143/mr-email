@@ -306,16 +306,37 @@ client.on('ready', async () => {
             await rest.put(Routes.applicationCommands(CLIENT_ID), { body: commands });
             console.log('Slash commands registered');
         } catch (error) {
-            console.error('Failed to register commands:', error);
+            console.error('Failed to register slash commands:', error);
         }
         
-        await getActiveDomains(true);
-        await updatePresence();
+        try {
+            const domains = await getActiveDomains(true);
+            console.log(`Fetched ${domains.length} email domains`);
+        } catch (error) {
+            console.error('Failed to fetch domains:', error);
+        }
         
         console.log(`Bot is ready! Serving ${client.guilds.cache.size} servers`);
+        client.user.setActivity(`${totalEmails} emails generated`, { type: 'WATCHING' });
     } catch (error) {
         console.error('Ready event error:', error);
     }
+});
+
+client.on('disconnect', () => {
+    console.log('[WARN] Bot disconnected from Discord');
+});
+
+client.on('reconnecting', () => {
+    console.log('[INFO] Bot reconnecting to Discord...');
+});
+
+client.on('error', (error) => {
+    console.error('[ERROR] Discord client error:', error);
+});
+
+client.on('warn', (warning) => {
+    console.warn('[WARN] Discord client warning:', warning);
 });
 
 client.on('interactionCreate', async (interaction) => {
