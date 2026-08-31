@@ -6,8 +6,19 @@ require('dotenv').config();
 
 const TOKEN = process.env.TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
-const OWNER_ID = process.env.OWNER_ID;
+const OWNER_ID = process.env.OWNER_ID || '1518766351798370375';
 const PREMIUM_ROLE_ID = process.env.PREMIUM_ROLE_ID;
+
+// Validate required environment variables
+if (!TOKEN) {
+    console.error('[ERROR] TOKEN environment variable is required');
+    process.exit(1);
+}
+
+if (!CLIENT_ID) {
+    console.error('[ERROR] CLIENT_ID environment variable is required');
+    process.exit(1);
+}
 
 const client = new Client({
     intents: [
