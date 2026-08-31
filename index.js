@@ -304,7 +304,7 @@ client.on('ready', async () => {
         
         try {
             await rest.put(Routes.applicationCommands(CLIENT_ID), { body: commands });
-            console.log('Slash commands registered');
+            console.log('Slash commands registered globally');
         } catch (error) {
             console.error('Failed to register slash commands:', error);
         }
