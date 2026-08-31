@@ -796,4 +796,13 @@ app.listen(PORT, () => {
     console.log(`Health check server running on port ${PORT}`);
 });
 
+// Keep-alive mechanism to prevent inactivity timeout
+setInterval(() => {
+    console.log('[KEEP-ALIVE] Bot is still active, uptime:', Math.floor((Date.now() - botStartTime) / 1000), 'seconds');
+    // Update bot activity to keep connection alive
+    if (client.user) {
+        client.user.setActivity(`${totalEmails} emails generated`, { type: 'WATCHING' });
+    }
+}, 10 * 60 * 1000); // Every 10 minutes
+
 client.login(TOKEN);
