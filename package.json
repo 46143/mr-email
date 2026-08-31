@@ -1,0 +1,19 @@
+{
+  "name": "temporary-email-bot",
+  "version": "1.0.0",
+  "description": "Temporary email generator bot for Discord using mail.tm API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
