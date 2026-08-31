@@ -339,6 +339,17 @@ client.on('warn', (warning) => {
     console.warn('[WARN] Discord client warning:', warning);
 });
 
+// Global error handlers to prevent crashes
+process.on('uncaughtException', (error) => {
+    console.error('[ERROR] Uncaught Exception:', error);
+    // Don't exit, just log the error
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('[ERROR] Unhandled Rejection at:', promise, 'reason:', reason);
+    // Don't exit, just log the error
+});
+
 client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return;
     
